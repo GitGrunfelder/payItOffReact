@@ -15,9 +15,9 @@ function Intro() {
       
       <p className='bg-purple-700 md:text-xl my-3 font-medium text-white p-6 rounded-md drop-shadow-sm'>
         1. Enter your loan information.<br />
-        2. Enter your income information.<br />
-        3. Enter your expenses.<br />
-        4. See your results!
+        2. Enter your monthly net income.<br />
+        3. Enter each of your mandatory monthly expenses.<br />
+        4. Click calculate to see your results!
       </p>
     </div>
   )
