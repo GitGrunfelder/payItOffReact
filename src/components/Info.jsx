@@ -54,7 +54,7 @@ function Info() {
                 Loan Amount:
               </label>
               <input
-                type="text"
+                type="number"
                 name="loanAmount"
                 id="loanAmount"
                 className="p-2 rounded-sm w-full border border-gray-300"
@@ -102,7 +102,7 @@ function Info() {
                     Interest Rate:
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="interestRate"
                     id="interestRate"
                     className="p-2 rounded-sm w-full border border-gray-300"
@@ -133,6 +133,7 @@ function Info() {
             <div className="expenses-field">
             <Expenses onClick={addExpense}/>
             </div>
+
             <Calculate loanInfo={loanInfo} maxSpare={spare}/>
           
           </form>
