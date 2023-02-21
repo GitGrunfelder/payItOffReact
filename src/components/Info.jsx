@@ -6,7 +6,13 @@ import Calculate from "./Calculate";
 
 function Info() {
   
-  const [loanInfo, setLoanInfo] = useState({})
+  const [loanInfo, setLoanInfo] = useState({
+    loanAmount: '',
+    maturationDate:'',
+    interestRate: '',
+    income: '',
+    showResults: false
+  })
   
   const [expenses, setExpenses] = useState([])
 
@@ -14,7 +20,7 @@ function Info() {
 
   const [spare, setSpare] = useState(0)
 
-
+  
 
 
 
@@ -34,18 +40,21 @@ function Info() {
      return prevVal + Number(nextItem.amount);
      }, 0))
   }, [expenses]);
-  
+
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(loanInfo)
-    console.log(spare)
-    console.log('loanInfo')
+    setLoanInfo({
+      ...loanInfo, 
+      showResults: !loanInfo.showResults
+    })
   }
 
   return (
+    
     <div className="flex items-center justify-center flex-col text-center pt-10 pb-6 mb-8">
-          <form className="form grid grid-cols-3 gap-5" onSubmit={handleSubmit}>
+        
+          <form className="form grid grid-cols-1 md:grid-cols-3 gap-5" onSubmit={handleSubmit}>
             <div className="loanInfo">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2 text-left"
@@ -55,8 +64,11 @@ function Info() {
               </label>
               <input
                 type="number"
+                step='any'
+                min='0'
                 name="loanAmount"
                 id="loanAmount"
+                placeholder="e.g. 12000"
                 className="p-2 rounded-sm w-full border border-gray-300"
                 value={loanInfo.loanAmount}
                 onChange={updateLoan}
@@ -65,7 +77,7 @@ function Info() {
                 className="block text-gray-700 text-sm font-bold my-2 text-left"
                 htmlFor="loanTerm"
               >
-                Maturation Date:
+                Loan Deadline:
 
               </label>
               <input
@@ -76,41 +88,26 @@ function Info() {
                 value={loanInfo.maturationDate}
                 onChange={updateLoan}
               />
-              <label
-                className="block text-gray-700 text-sm font-bold my-2 text-left"
-                htmlFor="interest"
-              >
-                Would you like to account for interest?
-              </label>
-              <select
-                className="rounded w-full p-2 border border-gray-300"
-                name="interest"
-                id="interest"
-                value={loanInfo.interest}
-                onChange={updateLoan}
-                required
-              >
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-              </select>
-              {loanInfo.interest === "Yes" && (
+              
                 <div className="interest">
                   <label
                     className="block text-gray-700 text-sm font-bold my-2 text-left"
                     htmlFor="interestRate"
                   >
-                    Interest Rate:
+                    Annual Interest Rate:
                   </label>
                   <input
                     type="number"
+                    step='any'
+                    min='0'
                     name="interestRate"
                     id="interestRate"
+                    placeholder="6.13"
                     className="p-2 rounded-sm w-full border border-gray-300"
                     value={loanInfo.interestRate}
                     onChange={updateLoan}
                   />
                 </div>
-              )}
             </div>
             
             <div className="income">
@@ -118,12 +115,13 @@ function Info() {
                 className="block text-gray-700 text-sm font-bold mb-2 text-left"
                 htmlFor="income"
                 >
-                Net Income:
+                Monthly Net Income:
                 </label>
                 <input
                 type="text"
                 name="income"
                 id="income"
+                placeholder="(After Taxes)"
                 className="p-2 rounded-sm w-full border border-gray-300"
                 value={loanInfo.income}
                 onChange={updateLoan}
@@ -133,10 +131,15 @@ function Info() {
             <div className="expenses-field">
             <Expenses onClick={addExpense}/>
             </div>
-
-            <Calculate loanInfo={loanInfo} maxSpare={spare}/>
+            <button 
+              type="submit"
+              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2 text-center my-3 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900 w-full md:col-span-3">
+              Calculate
+            </button>
+            
           
           </form>
+          {loanInfo.showResults && <Calculate loanInfo={loanInfo} maxSpare={spare}/>}
       <InfoBox 
         loanInfo={loanInfo}
         expenses={expenses}

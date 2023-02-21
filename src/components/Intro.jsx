@@ -7,7 +7,7 @@ function Intro() {
       <p className='text-purple md:text-xl mb-3 font-medium'>
         Find out how long it will take to pay off your loan.
       </p>
-      <p className='text-purple-800 md:text-xl my-8 font-normal max-w-prose leading-relaxed'>
+      <p className='text-purple-800 md:text-xl my-8 font-normal max-w-prose leading-relaxed px-5'>
         Ever wondered what would happen if you took every extra dollar you earned and put it towards paying off your loan? Wonder no more!
          This app calculates how much excess money you could have each month after accounting for bills, 
         and shows how long it would take to pay off a given loan using the max amount versus the minimum payments.

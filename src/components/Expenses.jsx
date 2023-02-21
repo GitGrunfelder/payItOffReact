@@ -35,6 +35,7 @@ function Expenses(props) {
           type="text"
           name="description"
           id="expenseName"
+          placeholder="e.g. 'Rent'"
           className="p-2 rounded-sm w-full border border-gray-300"
           value={item.description}
           onChange={handleUpdateExpense}
@@ -49,6 +50,7 @@ function Expenses(props) {
           type="text"
           name="amount"
           id="expenseCost"
+          placeholder="1000"
           className="p-2 rounded-sm w-full border border-gray-300"
           value={item.amount}
           onChange={handleUpdateExpense}
@@ -56,7 +58,7 @@ function Expenses(props) {
         <button
           type="button"
           onClick={handleAddExpense}
-          className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2 text-center mr-2 my-3 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+          className="col-span-1 w-full text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2 text-center mr-2 my-3 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
           disabled={!item.description || !item.amount}
         >
           Add Expense

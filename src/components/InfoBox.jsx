@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 function InfoBox(props) 
  {
-  var {loanAmount, maturationDate, interest, interestRate} = props.loanInfo;
+  var {loanAmount, maturationDate, interestRate} = props.loanInfo;
   const income = props.loanInfo.income;
   const expenses = props.expenses;
   const total = props.total;
@@ -16,13 +16,12 @@ function InfoBox(props)
 
 
   return (
-    <div className='fixed top-3 right-3 bg-purple-600 p-4 rounded-md text-white text-left'>
+    <div className='hidden lg:block fixed top-3 right-3 bg-purple-600 p-4 rounded-md text-white text-left'>
       <h2 className='currentStats font-bold border-b text-left mb-2'>Current Stats</h2>
-      <p>Loan Amount: {USD.format(loanAmount)}</p>
+      <p>Loan Amount: {loanAmount > 0 && USD.format(loanAmount)}</p>
       <p>Maturation Date: {maturationDate}</p>
-      <p>Include Interest: {interest}</p>
-      {interest == "Yes" && <p>Interest Rate: {interestRate}%</p>}
-      <p>Monthly Income: {USD.format(income)}</p>
+      <p>Interest Rate: {interestRate}%</p>
+      <p>Monthly Income: {income > 0 && USD.format(income)}</p>
 
       <h2 className='expense-list-title font-bold border-b mt-4 mb-2'>Expenses</h2>
       <div className='expense-list-container border-b pb-2'>
@@ -34,7 +33,7 @@ function InfoBox(props)
           )
         })}
       </div>
-      <p className='font-bold mt-4'>Total Expenses: {USD.format(total)}</p>
+      <p className='font-bold mt-4'>Total Expenses: {total > 0 && USD.format(total)}</p>
       {(income > 0 && expenses.length > 0)&& <p className='font-bold mt-4'>Max Spare Income: {USD.format(spare)}</p>}
     </div>
   )
