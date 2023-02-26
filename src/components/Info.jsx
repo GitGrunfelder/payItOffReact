@@ -20,6 +20,7 @@ function Info() {
 
   const [spare, setSpare] = useState(0)
 
+  let USD = Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
   
 
 
@@ -102,7 +103,7 @@ function Info() {
                     min='0'
                     name="interestRate"
                     id="interestRate"
-                    placeholder="6.13"
+                    placeholder="'6.13'"
                     className="p-2 rounded-sm w-full border border-gray-300"
                     value={loanInfo.interestRate}
                     onChange={updateLoan}
@@ -131,9 +132,23 @@ function Info() {
             <div className="expenses-field">
             <Expenses onClick={addExpense}/>
             </div>
+
+
+            
+            <div className='expense-list-container border-b pb-2 lg:hidden text-left'>
+              <h2 className='expense-list-title font-bold border-b mb-2 pb-2'>Expenses</h2>
+              {expenses.map(expense => {
+                return (
+                  <div key={expense.id} className='expense-list-item'>
+                    <p>{expense.description}: {USD.format(expense.amount)}</p>
+                  </div>
+                )
+              })}
+            </div>
+
             <button 
               type="submit"
-              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2 text-center my-3 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900 w-full md:col-span-3">
+              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2 text-center md:my-3 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900 w-full md:col-span-3">
               Calculate
             </button>
             
